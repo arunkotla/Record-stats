@@ -8,14 +8,16 @@ contract ReviewDapp{
        string message ; 
     }
 
-    address owner = payable(msg.sender);
+    address payable public owner;
 
     Log[] public log;
 
-    function EnterDetails(string memory _name, string memory _message) payable public {
-        require(msg.value >0, "minimum amount should be more than 0");
-        transfer.owner[msg.value];
-        log.push(Log(_name, _message));
+
+    function EnterDet (string calldata name, string calldata message) public payable {
+        require(msg.value> 0, "min 0 eth to send");
+        owner.transfer(msg.value);
+        log.push(Log(name, message));
+
     }
 
     function getLogs() public view returns (Log[] memory){
